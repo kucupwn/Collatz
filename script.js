@@ -3,6 +3,8 @@ const startNumber = document.getElementById("startNum");
 const autoButton = document.getElementById("autoBtn");
 const startButton = document.getElementById("startBtn");
 const stopButton = document.getElementById("stopBtn");
+const inputSpeed = document.getElementById("inputSpeed");
+const setSpeedBtn = document.getElementById("setSpeedBtn");
 
 let autoInterval = null;
 
@@ -22,7 +24,7 @@ function collatz(n) {
 
 // Set up SVG dimensions
 const width = 720;
-const height = 580;
+const height = 560;
 const margin = { top: 30, right: 20, bottom: 30, left: 100 };
 
 // Create an SVG container
@@ -59,6 +61,7 @@ let firstNumber = 4;
 let allSequences = [];
 let maxX = 0;
 let maxY = 0;
+let speed = 3000;
 
 function setupGraph() {
   // Initialize empty domains for x and y scales
@@ -110,13 +113,21 @@ function drawCollatzSequence(firstNumber) {
     .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
     .attr("stroke-dashoffset", totalLength)
     .transition()
-    .duration(2000)
+    .duration(speed / 2)
     .ease(d3.easeLinear)
     .attr("stroke-dashoffset", 0);
 
   // Update axes
-  svg.select(".x-axis").transition().duration(1000).call(d3.axisBottom(x));
-  svg.select(".y-axis").transition().duration(1000).call(d3.axisLeft(y));
+  svg
+    .select(".x-axis")
+    .transition()
+    .duration(speed / 4)
+    .call(d3.axisBottom(x));
+  svg
+    .select(".y-axis")
+    .transition()
+    .duration(speed / 4)
+    .call(d3.axisLeft(y));
 
   text.text(`Number ${firstNumber}`);
 
@@ -143,7 +154,7 @@ autoButton.addEventListener("click", () => {
 
     // Update visualization
     updateVisualization();
-    autoInterval = setInterval(updateVisualization, 3000);
+    autoInterval = setInterval(updateVisualization, speed);
   }
 });
 
@@ -160,4 +171,18 @@ startButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   clearInterval(autoInterval);
+});
+
+setSpeedBtn.addEventListener("click", () => {
+  const inputValue = parseInt(inputSpeed.value);
+  if (!isNaN(inputValue)) {
+    speed = inputValue;
+    inputSpeed.value = "";
+
+    // Restart the interval if it's running
+    if (autoInterval !== null) {
+      clearInterval(autoInterval);
+      autoInterval = setInterval(updateVisualization, speed);
+    }
+  }
 });
