@@ -114,7 +114,8 @@ function drawCollatzSequence(firstNumber) {
     .attr("stroke", color(firstNumber))
     .attr("d", line)
     .on("mouseover", () => {
-      hoverText.text(`Number: ${firstNumber}`);
+      const maxVal = d3.max(sequence);
+      hoverText.text(`Number: ${firstNumber}, Max: ${maxVal}`);
     })
     .on("mouseout", () => {
       hoverText.text("");
