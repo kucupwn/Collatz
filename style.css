@@ -1,0 +1,34 @@
+html {
+  font-size: 62.5%;
+}
+
+.line {
+  fill: none;
+  stroke-width: 2px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-left {
+  display: flex;
+  align-items: center;
+}
+
+.input-right {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  margin: 1rem;
+  font-size: 2rem;
+}
+
+input {
+  font-size: 2rem;
+}
