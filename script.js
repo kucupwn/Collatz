@@ -57,6 +57,15 @@ const text = svg
   .attr("dy", "-8px")
   .style("font-size", "2rem");
 
+// Append a text element for displaying the hovered number
+const hoverText = svg
+  .append("text")
+  .attr("x", width - margin.right)
+  .attr("y", margin.top)
+  .attr("text-anchor", "end")
+  .attr("dy", "-8px")
+  .style("font-size", "1.5rem");
+
 let firstNumber = 4;
 let allSequences = [];
 let maxX = 0;
@@ -103,7 +112,13 @@ function drawCollatzSequence(firstNumber) {
     .datum(sequence)
     .attr("class", "line")
     .attr("stroke", color(firstNumber))
-    .attr("d", line);
+    .attr("d", line)
+    .on("mouseover", () => {
+      hoverText.text(`Number: ${firstNumber}`);
+    })
+    .on("mouseout", () => {
+      hoverText.text("");
+    });
 
   // Get the total length of the path
   const totalLength = path.node().getTotalLength();
