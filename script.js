@@ -72,6 +72,11 @@ let maxX = 0;
 let maxY = 0;
 let speed = 3000;
 
+function resetScale() {
+  maxX = 0;
+  maxY = 0;
+}
+
 function setupGraph() {
   // Initialize empty domains for x and y scales
   x.domain([0, 1]);
@@ -165,8 +170,7 @@ autoButton.addEventListener("click", () => {
 
     // Reset variables
     allSequences = [];
-    maxX = 0;
-    maxY = 0;
+    resetScale();
 
     // Update visualization
     updateVisualization();
@@ -177,10 +181,11 @@ autoButton.addEventListener("click", () => {
 startButton.addEventListener("click", () => {
   const inputValue = parseInt(inputNumber.value);
   if (!isNaN(inputValue)) {
+    svg.selectAll(".sequence").remove();
+    resetScale();
     drawCollatzSequence(inputValue);
     inputNumber.value = "";
   } else {
-    console.log("Invalid input");
     inputNumber.value = "";
   }
 });
