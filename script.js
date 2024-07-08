@@ -21,9 +21,9 @@ function collatz(n) {
 }
 
 // Set up SVG dimensions
-const width = 960;
-const height = 720;
-const margin = { top: 30, right: 20, bottom: 30, left: 60 };
+const width = 720;
+const height = 580;
+const margin = { top: 30, right: 20, bottom: 30, left: 100 };
 
 // Create an SVG container
 const svg = d3.select("svg").attr("width", width).attr("height", height);
@@ -60,7 +60,17 @@ let allSequences = [];
 let maxX = 0;
 let maxY = 0;
 
-function setupGraph() {}
+function setupGraph() {
+  // Initialize empty domains for x and y scales
+  x.domain([0, 1]);
+  y.domain([0, 1]);
+
+  // Draw the axes with empty domains
+  svg.select(".x-axis").call(d3.axisBottom(x));
+  svg.select(".y-axis").call(d3.axisLeft(y));
+}
+
+setupGraph();
 
 // Function to draw the Collatz sequence with animation
 function drawCollatzSequence(firstNumber) {

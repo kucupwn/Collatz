@@ -2,6 +2,11 @@ html {
   font-size: 62.5%;
 }
 
+svg {
+  display: block;
+  margin: 0 auto;
+}
+
 .line {
   fill: none;
   stroke-width: 2px;
@@ -26,9 +31,9 @@ html {
 
 button {
   margin: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 input {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
