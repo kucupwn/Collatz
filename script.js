@@ -43,12 +43,11 @@ function applyPath(svg, sequence, line, firstNumber) {
     .attr("class", "line")
     .attr("stroke", color(firstNumber))
     .attr("d", line)
-    .on("mouseover", () => {
+    .on("click", () => {
       const maxVal = d3.max(sequence);
-      hoverText.text(`Number: ${firstNumber}, Max: ${maxVal}`);
-    })
-    .on("mouseout", () => {
-      hoverText.text("");
+      hoverText.text(
+        `Number: ${firstNumber}, Max: ${maxVal}, Lenght: ${sequence.length - 1}`
+      );
     });
 
   // Get the total length of the path
