@@ -179,6 +179,7 @@ inputNumber.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     startButton.click();
+    document.activeElement.blur();
   }
 });
 
@@ -198,6 +199,7 @@ inputFirstNumber.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     autoButton.click();
+    document.activeElement.blur();
   }
 });
 
@@ -225,6 +227,7 @@ inputSpeed.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     setSpeedButton.click();
+    document.activeElement.blur();
   }
 });
 
