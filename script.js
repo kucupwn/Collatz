@@ -135,19 +135,16 @@ const setSpeedBtn = document.getElementById("setSpeedBtn");
 const scaleMode = document.getElementById("scaleMode");
 
 // Set up SVG dimensions
-const width = window.innerWidth < 500 ? 720 : 380;
+const width = 720;
 const height = 560;
 const margin = { top: 30, right: 20, bottom: 30, left: 40 };
 
-// Create an SVG container
-const svg = d3.select("svg").attr("width", width).attr("height", height);
-// Append x-axis and y-axis once
-
-// Set up scales
 const x = d3.scaleLinear().range([margin.left, width - margin.right]);
 const y = d3.scaleLinear().range([height - margin.bottom, margin.top]);
 
 const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+const svg = d3.select("svg").attr("width", width).attr("height", height);
 
 // Append a text element for displaying the current starting number
 const text = svg
