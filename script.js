@@ -12,7 +12,17 @@ function collatz(n) {
   return sequence;
 }
 
-function setupGraph() {
+function setupGraph(svg, x, y, height, margin) {
+  svg
+    .append("g")
+    .attr("class", "x-axis")
+    .attr("transform", `translate(0,${height - margin.bottom})`);
+
+  svg
+    .append("g")
+    .attr("class", "y-axis")
+    .attr("transform", `translate(${margin.left},0)`);
+
   // Initialize empty domains for x and y scales
   x.domain([0, 1]);
   y.domain([0, 1]);
@@ -127,20 +137,11 @@ const scaleMode = document.getElementById("scaleMode");
 // Set up SVG dimensions
 const width = 720;
 const height = 560;
-const margin = { top: 30, right: 20, bottom: 30, left: 100 };
+const margin = { top: 30, right: 20, bottom: 30, left: 120 };
 
 // Create an SVG container
 const svg = d3.select("svg").attr("width", width).attr("height", height);
 // Append x-axis and y-axis once
-svg
-  .append("g")
-  .attr("class", "x-axis")
-  .attr("transform", `translate(0,${height - margin.bottom})`);
-
-svg
-  .append("g")
-  .attr("class", "y-axis")
-  .attr("transform", `translate(${margin.left},0)`);
 
 // Set up scales
 const x = d3.scaleLinear().range([margin.left, width - margin.right]);
@@ -151,9 +152,9 @@ const color = d3.scaleOrdinal(d3.schemeCategory10);
 // Append a text element for displaying the current starting number
 const text = svg
   .append("text")
-  .attr("x", width / 2)
+  .attr("x", 0)
   .attr("y", margin.top)
-  .attr("text-anchor", "middle")
+  .attr("text-anchor", "top-left")
   .attr("dy", "-8px")
   .style("font-size", "2rem");
 
@@ -173,7 +174,7 @@ let maxX = 0;
 let maxY = 0;
 let speed = 3000;
 
-setupGraph();
+setupGraph(svg, x, y, height, margin);
 
 //////////////////////////////////////////////////////////////////
 // Event listeners
