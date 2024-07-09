@@ -46,7 +46,7 @@ function applyPath(svg, sequence, line, firstNumber) {
     .on("click", () => {
       const maxVal = d3.max(sequence);
       hoverText.text(
-        `Number: ${firstNumber}, Max: ${maxVal}, Lenght: ${sequence.length - 1}`
+        `Number: ${firstNumber} Max: ${maxVal} Lenght: ${sequence.length - 1}`
       );
     });
 
@@ -183,6 +183,7 @@ inputNumber.addEventListener("keypress", (e) => {
 });
 
 startButton.addEventListener("click", () => {
+  clearInterval(autoInterval);
   const inputValue = parseInt(inputNumber.value);
   if (!isNaN(inputValue)) {
     svg.selectAll(".sequence").remove();
@@ -211,6 +212,7 @@ autoButton.addEventListener("click", () => {
     // Reset variables
     allSequences = [];
     resetScale();
+    inputFirstNumber.value = "";
 
     // Update visualization
     updateVisualization();
