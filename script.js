@@ -81,8 +81,8 @@ function updateScale(sequence, x, y) {
 }
 
 function resetScale() {
-  maxX = 0;
-  maxY = 0;
+  maxX = 1;
+  maxY = 1;
 }
 
 function axisAnimation(svg, x, y, speed) {
@@ -135,9 +135,9 @@ const setSpeedBtn = document.getElementById("setSpeedBtn");
 const scaleMode = document.getElementById("scaleMode");
 
 // Set up SVG dimensions
-const width = 720;
+const width = window.innerWidth < 500 ? 720 : 380;
 const height = 560;
-const margin = { top: 30, right: 20, bottom: 30, left: 120 };
+const margin = { top: 30, right: 20, bottom: 30, left: 40 };
 
 // Create an SVG container
 const svg = d3.select("svg").attr("width", width).attr("height", height);
