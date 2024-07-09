@@ -126,12 +126,12 @@ function updateVisualization() {
 }
 
 const inputNumber = document.getElementById("inputNum");
-const startNumber = document.getElementById("startNum");
+const inputFirstNumber = document.getElementById("startNum");
 const autoButton = document.getElementById("autoBtn");
 const startButton = document.getElementById("startBtn");
 const stopButton = document.getElementById("stopBtn");
 const inputSpeed = document.getElementById("inputSpeed");
-const setSpeedBtn = document.getElementById("setSpeedBtn");
+const setSpeedButton = document.getElementById("setSpeedBtn");
 const scaleMode = document.getElementById("scaleMode");
 
 // Set up SVG dimensions
@@ -175,19 +175,10 @@ setupGraph(svg, x, y, height, margin);
 
 //////////////////////////////////////////////////////////////////
 // Event listeners
-autoButton.addEventListener("click", () => {
-  if (!isNaN(firstNumber)) {
-    firstNumber = parseInt(startNumber.value);
-    svg.selectAll(".sequence").remove();
-    clearInterval(autoInterval);
-
-    // Reset variables
-    allSequences = [];
-    resetScale();
-
-    // Update visualization
-    updateVisualization();
-    autoInterval = setInterval(updateVisualization, speed);
+inputNumber.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    startButton.click();
   }
 });
 
@@ -203,11 +194,41 @@ startButton.addEventListener("click", () => {
   }
 });
 
+inputFirstNumber.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    autoButton.click();
+  }
+});
+
+autoButton.addEventListener("click", () => {
+  if (!isNaN(firstNumber)) {
+    firstNumber = parseInt(inputFirstNumber.value);
+    svg.selectAll(".sequence").remove();
+    clearInterval(autoInterval);
+
+    // Reset variables
+    allSequences = [];
+    resetScale();
+
+    // Update visualization
+    updateVisualization();
+    autoInterval = setInterval(updateVisualization, speed);
+  }
+});
+
 stopButton.addEventListener("click", () => {
   clearInterval(autoInterval);
 });
 
-setSpeedBtn.addEventListener("click", () => {
+inputSpeed.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    setSpeedButton.click();
+  }
+});
+
+setSpeedButton.addEventListener("click", () => {
   const inputValue = parseInt(inputSpeed.value);
   if (!isNaN(inputValue)) {
     speed = inputValue;
